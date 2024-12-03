@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import { styled } from 'styled-components';
 
+import Button from './Button.jsx';
+import Input from './Input.jsx';
+
 const ControlContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -30,39 +33,29 @@ export default function AuthInputs() {
 
   return (
     <div id="auth-inputs">
-    <ControlContainer>
-      <div className="controls">
-        <p>
-          {/* Dynamic styling - merge conditional and permanent classes*/}
-          <label className= {`label ${ emailNotValid ? 'invalid' : '' }`}>Email</label>
-          {/* Using styled components */}
-
-          <input
-            type="email"
-            //using conditional statement in styling
-            //style={{ backgroundColor: emailNotValid ? '#fed2d2' : '#d1d5db'}}
-            className={emailNotValid ? 'invalid' : undefined}
-            onChange={(event) => handleInputChange('email', event.target.value)}
-          />
-
-        </p>
-        <p>
-          <label>Password</label>
-          <input
-            type="password"
-            className={passwordNotValid ? 'invalid' : undefined}
-            onChange={(event) =>
-              handleInputChange('password', event.target.value)
-            }
-          />
-        </p>
-      </div>
+      <ControlContainer>
+        <Input
+          label="Email"
+          $invalid={emailNotValid}
+          type="email"
+          // style={{
+          //   backgroundColor: emailNotValid ? '#fed2d2' : '#d1d5db'
+          // }}
+          onChange={(event) => handleInputChange('email', event.target.value)}
+        />
+        <Input
+          $invalid={passwordNotValid}
+          label="Password"
+          type="password"
+          onChange={(event) => handleInputChange('password', event.target.value)
+          }
+        />
       </ControlContainer>
       <div className="actions">
         <button type="button" className="text-button">
           Create a new account
         </button>
-        <button className='button' onClick={handleLogin}>Sign In</button>
+        <Button onClick={handleLogin}>Sign In</Button>
       </div>
     </div>
   );
