@@ -24,9 +24,12 @@ export default function AuthInputs() {
     <div id="auth-inputs">
       <div className="controls">
         <p>
-          <label>Email</label>
+          {/* Dynamic styling - merge conditional and permanent classes*/}
+          <label className= {`label ${ emailNotValid ? 'invalid' : '' }`}>Email</label>
           <input
             type="email"
+            //using conditional statement in styling
+            //style={{ backgroundColor: emailNotValid ? '#fed2d2' : '#d1d5db'}}
             className={emailNotValid ? 'invalid' : undefined}
             onChange={(event) => handleInputChange('email', event.target.value)}
           />
